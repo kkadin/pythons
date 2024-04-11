@@ -10,6 +10,15 @@ import datetime
 
 # IRP_개인연금 정보
 dic_pension_irp =  {
+                        # 보유 수량 입력
+                        'list_hold_num'     : [ 178,
+                                               776,
+                                               505,
+                                               74,
+                                               25 ],
+                        # 추가 투자금
+                        'money_add_won'     : 1085000,
+
                         # stock name 
                         'list_stock_name'   : [ "kodex_bank",
                                                 "arirang_msci",
@@ -27,20 +36,23 @@ dic_pension_irp =  {
                                                25.0,
                                                30.0,
                                                30.0,
-                                               10.0],
-                        # 보유 수량 입력
-                        'list_hold_num'     : [ 199,
-                                               747,
-                                               525,
-                                               69,
-                                               23 ],
-                        # 추가 투자금
-                        'money_add_won'     : 729778
+                                               10.0]
                         
                    }
 
 # 연금저축 정보
 dic_pension =  {
+                        # 보유 수량 입력
+                        'list_hold_num'     : [ 318,
+                                               1447,
+                                               105,
+                                               1727,
+                                               365,
+                                               146,
+                                               75],
+                        # 추가 투자금
+                        'money_add_won'     : 1317208,
+
                         # stock name 
                         'list_stock_name'   : [ "gold",
                                                 "kodex_usbond10y",
@@ -67,23 +79,13 @@ dic_pension =  {
                                                25.0,
                                                20.0,
                                                10.0
-                                              ],
-                        # 보유 수량 입력
-                        'list_hold_num'     : [ 293,
-                                               1395,
-                                               120,
-                                               1708,
-                                               392,
-                                               138,
-                                               69],
-                        # 추가 투자금
-                        'money_add_won'     : 1153803
-                        
+                                              ]
                    }
 
 # 계산할 정보 선택
 PENSION = 0     # 연금 ( 연금저축 )
 PENSION_IRP = 1 # 연금IRP ( 개인연금 IRP )
+
 #mode = PENSION
 mode = PENSION_IRP
 
@@ -111,7 +113,7 @@ else:
 DAY_SHIFT = 5   
 
 # 주가 추출할 날짜 수 ( 며칠동안 ? )
-DAY_LENGTH = 1
+DAY_LENGTH = 3
 
 # 시작 날짜
 day_start = datetime.date.today() - datetime.timedelta(DAY_SHIFT)
