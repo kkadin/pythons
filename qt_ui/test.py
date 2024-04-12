@@ -8,21 +8,32 @@ from PyQt5 import uic
 form_class = uic.loadUiType("test.ui")[0]
 
 #화면을 띄우는데 사용되는 Class 선언
-# class WindowClass(QMainWindow, form_class) :
-class WindowClass(QDialog, form_class) :
+class WindowClass(QMainWindow, form_class) :
+# class WindowClass(QDialog, form_class) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
 
-if __name__ == "__main__" :
-    #QApplication : 프로그램을 실행시켜주는 클래스
-    app = QApplication(sys.argv) 
+if __name__ == "__main__":
+    # import sys
+    import os #<---change-1
+    os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1" #<---change-2
+    app = QApplication(sys.argv)
+    MainWindow = WindowClass()
+    MainWindow.show()
+    sys.exit(app.exec_())
 
-    #WindowClass의 인스턴스 생성
-    myWindow = WindowClass() 
+# if __name__ == "__main__" :
+#     #QApplication : 프로그램을 실행시켜주는 클래스
+#     app = QApplication(sys.argv) 
 
-    #프로그램 화면을 보여주는 코드
-    myWindow.show()
+#     #WindowClass의 인스턴스 생성
+#     myWindow = WindowClass() 
 
-    #프로그램을 이벤트루프로 진입시키는(프로그램을 작동시키는) 코드
-    app.exec_()
+#     #프로그램 화면을 보여주는 코드
+#     myWindow.show()
+
+#     #프로그램을 이벤트루프로 진입시키는(프로그램을 작동시키는) 코드
+#     app.exec_()
+
+
