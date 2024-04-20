@@ -1,0 +1,21 @@
+python program install 
+- custom 으로 설치하고 path 포함 option을 check할 것
+- install 위치 : D:\Program Files\Python39
+
+버젼 확인
+- python --version
+
+gui 개발용 가상환경 만들기
+- python -m venv pyQt
+ : pyQt 라는 folder에 현재 python version의 가상환경을 만든다. 
+
+vsc (visual studio code)에서 가상환경 선택
+- 우측하단 click한 후 pyQt/Scripts/python.exe 선택
+
+module install 
+- vsc terminal 에서 module을 install할 가상환경으로 진입
+ : pyQt/Scripts/activate.bat 실행
+ : pip list 수행하여 현재 설치된 module 확인
+
+gui module install
+- pip install PyQt5
