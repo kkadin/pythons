@@ -10,7 +10,7 @@ X_SENSOR = 2        # target touch sensor x position
 Y_SENSOR = 2        # target touch sensor y position
 
 # 숫자 데이터 블럭 생성
-data_block = np.random.randint(1, 101, size=((Y_NUM+Y_NUM_SPACE)*BLOCK_REPEAT, X_NUM))
+data_block = np.random.randint(-2, 2, size=((Y_NUM+Y_NUM_SPACE)*BLOCK_REPEAT, X_NUM))
 
 # SENSOR_DATA를 매 block 마다 삽입
 for block_idx in range(BLOCK_REPEAT):
@@ -22,13 +22,11 @@ for block_idx in range(BLOCK_REPEAT):
 # 데이터 블럭 배열을 DataFrame으로 변환
 df = pd.DataFrame(data_block)
 
-# 빈 행 생성
-# for i in range(0, len(df), Y_NUM):
-#     #df.loc[i + Y_NUM] = pd.Series(np.nan, df.columns)
-#     df.loc[(i+1)*(Y_NUM+Y_NUM_SPACE)] = pd.Series(np.nan, df.columns)
+# 빈 행을 block의 맨뒤에 생성
 for i in range(0, len(df), Y_NUM+Y_NUM_SPACE):
     #df.loc[i + Y_NUM] = pd.Series(np.nan, df.columns)
     row = i+(Y_NUM+Y_NUM_SPACE)-1
+    #row = i
     df.loc[row] = pd.Series(np.nan, df.columns)
 
 # 엑셀 파일 저장
