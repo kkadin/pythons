@@ -11,13 +11,13 @@ import datetime
 # IRP_개인연금 정보
 dic_pension_irp =  {
                         # 보유 수량 입력
-                        'list_hold_num'     : [ 178,
-                                               776,
-                                               505,
-                                               74,
-                                               25 ],
+                        'list_hold_num'     : [ 185,
+                                               795,
+                                               496,
+                                               77,
+                                               26 ],
                         # 추가 투자금
-                        'money_add_won'     : 1085000,
+                        'money_add_won'     : 392582,
 
                         # stock name 
                         'list_stock_name'   : [ "kodex_bank",
@@ -43,13 +43,13 @@ dic_pension_irp =  {
 # 연금저축 정보
 dic_pension =  {
                         # 보유 수량 입력
-                        'list_hold_num'     : [ 318,
-                                               1447,
-                                               105,
+                        'list_hold_num'     : [ 300,
+                                               1509,
+                                               118,
                                                1727,
-                                               365,
-                                               146,
-                                               75],
+                                               363,
+                                               152,
+                                               77],
                         # 추가 투자금
                         'money_add_won'     : 1317208,
 
@@ -83,8 +83,8 @@ dic_pension =  {
                    }
 
 # 계산할 정보 선택
-PENSION = 0     # 연금 ( 연금저축 )
-PENSION_IRP = 1 # 연금IRP ( 개인연금 IRP )
+PENSION_IRP = 0 # 연금IRP ( 개인연금 IRP )
+PENSION = 1     # 연금 ( 연금저축 )
 
 #mode = PENSION
 mode = PENSION_IRP
