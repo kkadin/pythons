@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import os
-from global_vars_for_qt import *
+from global_var import *
 
 # sys.path.insert(0, 'D:/software/python/pythons/pensions')
 # import global_var
