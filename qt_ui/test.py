@@ -18,6 +18,20 @@ class WindowClass(QMainWindow, form_class) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
+        # self.textbox.textChanged.connect(self.on_text_changed)
+        # self.lineEdit.lineChanged.connect(self.on_line_changed)
+
+        self.pushButton_Run.clicked.connect(self.button_event)
+
+
+    # def on_line_changed(self, line):
+    #     print(f"Line changed: {line}")
+
+    def button_event(self):
+        text = self.lineEdit.text() # line_edit text 값 가져오기
+        self.label_test.setText(text) # label에 text 설정하기
+
+
 
 if __name__ == "__main__":
     # import sys
