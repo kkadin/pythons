@@ -2,7 +2,17 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import os
+from global_vars_for_qt import *
 
+# sys.path.insert(0, 'D:/software/python/pythons/pensions')
+# import global_var
+# from global_var import *
+# from my_file import my_variable
+
+# import os
+# dir_path = os.path.abspath('D:/software/python/pythons/pensions')
+# sys.path.insert(0, dir_path)
+# from global_var import *
 
 print('current dir : {}'.format(os.getcwd()))
 os.chdir('D:/software/python/pythons/qt_ui')
@@ -15,6 +25,23 @@ form_class = uic.loadUiType("test.ui")[0]
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow, form_class) :
 # class WindowClass(QDialog, form_class) :
+    def load_stock_hold_num(self):
+        list_stock_info = list_pension
+
+        list_stock_name = []
+        list_stock_number = []
+        list_hold_num = []
+        list_portion = []
+        for item in list_stock_info:
+            list_stock_name.append(item['name']) 
+            list_stock_number.append(item['number']) 
+            list_hold_num.append(item['hold_num']) 
+            list_portion.append(item['portion']) 
+        
+        self.lineEdit.setText(str(list_hold_num[0]))    
+        # self.lineEdit.setText('init text')    
+
+
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
@@ -22,7 +49,7 @@ class WindowClass(QMainWindow, form_class) :
         # self.lineEdit.lineChanged.connect(self.on_line_changed)
 
         self.pushButton_Run.clicked.connect(self.button_event)
-
+        self.load_stock_hold_num()
 
     # def on_line_changed(self, line):
     #     print(f"Line changed: {line}")
