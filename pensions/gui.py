@@ -15,12 +15,12 @@ from global_var import *
 # from global_var import *
 
 print('current dir : {}'.format(os.getcwd()))
-os.chdir('D:/software/python/pythons/qt_ui')
+os.chdir('D:/software/python/pythons/pensions')
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
 # form_class = uic.loadUiType("UI파일이름.ui")[0]
-form_class = uic.loadUiType("test.ui")[0]
+form_class = uic.loadUiType("gui.ui")[0]
 
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow, form_class) :
