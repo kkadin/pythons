@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from scipy import signal
 
 # Coefficients of the transfer function H(z) = (b0 + b1*z^-1) / (1 + a1*z^-1)
-b = [1, -0.5]  # Numerator coefficients
-a = [1, -0.8]  # Denominator coefficients
+b = [0.1, -0.0]  # Numerator coefficients
+a = [1, -0.9]  # Denominator coefficients
 
 # Sampling rate in Hz
 fs = 60  # Sampling frequency in Hz
