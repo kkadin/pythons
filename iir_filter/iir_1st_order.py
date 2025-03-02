@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 import math
 
 # Filter type selection
-filter_type = "high_pass"  # Options: "low_pass", "high_pass"
-# filter_type = "low_pass"  # Options: "low_pass", "high_pass"
+# filter_type = "high_pass"  # Options: "low_pass", "high_pass"
+filter_type = "low_pass"  # Options: "low_pass", "high_pass"
 
 ZERO_COUNT = 10
 zero_list = [0]*ZERO_COUNT
