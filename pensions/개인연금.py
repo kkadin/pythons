@@ -7,6 +7,7 @@ Created on Sun Feb 25 09:44:47 2024
 from global_var import *
 import yfinance as yf
 import datetime
+import numpy as np
 
 list_hold_num = []              # 보유수량
 list_stock_name = []
@@ -72,6 +73,10 @@ list_change_num = []
 for target, total, close_mean in zip ( list_target, list_total, list_close_mean):
     change_num = (target - total)/close_mean
     list_change_num.append(change_num)
+
+np_arr_change_num = np.array(list_change_num)
+print(np_arr_change_num)
+print(np_arr_change_num.mean())
 
 # 매매 수량 프린트
 print()
