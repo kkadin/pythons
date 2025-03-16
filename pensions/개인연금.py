@@ -8,6 +8,8 @@ from global_var import *
 import yfinance as yf
 import datetime
 import numpy as np
+import pandas as pd
+from tkinter import Tk, Text, END
 
 list_hold_num = []              # 보유수량
 list_stock_name = []
@@ -35,6 +37,8 @@ day_start = datetime.date.today() - datetime.timedelta(DAY_SHIFT)
 # 마치는 날짜
 day_end = day_start + datetime.timedelta(DAY_LENGTH)
 
+# 주식 종목 가격 정보 정리 : 가능한 날짜의 종가를 averaging함.
+# ! 현재 가격은 못가져 오나?
 # 날짜 사이 주가 추출
 # list_of_df_stock_data = []
 list_close_mean = []
@@ -45,6 +49,12 @@ for item in list_stock_number:
     # list_of_df_stock_data.append(stock_data)
     mean = stock_data["Close"].mean().iloc[0]
     list_close_mean.append(mean)
+
+# # # report 작성
+df_report = pd.DataFrame(list_stock_info)
+# df_report['현재가격'] = pd.Series(list_close_mean)
+df_report['current price'] = pd.Series(list_close_mean)
+
 
 # 평균값 구하기
 # list_close_mean = []
@@ -60,6 +70,9 @@ for close_mean, hold_num in zip(list_close_mean, list_hold_num):
 
 sum_of_total = sum(list_total)
 
+# df_report['총가격'] = pd.Series(list_total)
+df_report['total value'] = pd.Series(list_total)
+
 
 # 목표 금액
 list_target = []
@@ -68,21 +81,54 @@ for portion in list_portion:
     # print("target:{} = (sum_of_total:{} + money_add_won:{}) * portion:{} / 100".format(target, sum_of_total, money_add_won, portion))
     list_target.append(target)
 
+df_report['target total'] = pd.Series(list_target)
+
 # 매매 수량
 list_change_num = []
 for target, total, close_mean in zip ( list_target, list_total, list_close_mean):
     change_num = (target - total)/close_mean
     list_change_num.append(change_num)
 
-np_arr_change_num = np.array(list_change_num)
-print(np_arr_change_num)
-print(np_arr_change_num.mean())
+df_report['trading'] = pd.Series(list_change_num)
+
+df_report['hold_num_after_trading'] = pd.Series(np.array(list_hold_num) + np.array(list_change_num))
+# df_report['total_after_trading'] = df_report['hold_num_after_trading'] * np.array(list_close_mean)
+df_report['total_after_trading'] = df_report['hold_num_after_trading'].astype(int) * df_report['current price'].astype(int)
+
+# Add a row with sums
+df_report.loc[len(df_report)] = df_report.select_dtypes(include=[np.number]).sum()
+df_report.loc[len(df_report)-1, 'hold_num'] = 0     # Override 'number'
+df_report.loc[len(df_report)-1, 'name'] = ''        # Override 'name'
+df_report.loc[len(df_report)-1, 'number'] = ''     # Override 'number'
+df_report.loc[len(df_report)-1, 'current price'] = 0
+df_report.loc[len(df_report)-1, 'trading'] = 0
+df_report.loc[len(df_report)-1, 'hold_num_after_trading'] = 0
+
+
+# np_arr_change_num = np.array(list_change_num)
+# print(np_arr_change_num)
+# print(np_arr_change_num.mean())
 
 # 매매 수량 프린트
-print()
-print()
-for stock_name, change_num in zip(list_stock_name, list_change_num):
-    # rounded_num = int(round(change_num.iloc[0], 0))
-    rounded_num = int(round(change_num, 0))
-    print('{:>15}:{:>5}'.format(stock_name, rounded_num))
+# print()
+# print()
+# for stock_name, change_num in zip(list_stock_name, list_change_num):
+#     # rounded_num = int(round(change_num.iloc[0], 0))
+#     rounded_num = int(round(change_num, 0))
+#     print('{:>15}:{:>5}'.format(stock_name, rounded_num))
 
+# Set float display format to show no decimal places
+pd.options.display.float_format = '{:.0f}'.format
+pd.set_option('display.max_rows', None)      # Show all rows
+pd.set_option('display.max_columns', None)   # Show all columns
+print(df_report.iloc[:,0:5])
+print("added fund : {}".format(money_add_won))
+print(df_report.iloc[:,5:10])
+
+# Create a simple Tkinter window
+# root = Tk()
+# root.title("DataFrame Viewer")
+# text = Text(root)
+# text.insert(END, df_report.to_string())
+# text.pack()
+# root.mainloop()  # Keeps the window open until you close it
